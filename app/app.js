@@ -1,0 +1,11 @@
+angular.module('app', 
+				['ngRoute', 
+				 'ngMask',
+				 'angular-bootstrap-select',
+				 'ngDialog', 
+				 'app.factories',
+				 'app.dashboard',
+				 'app.empresa',
+				 'app.usuario',
+				 'app.marketing'
+				]);

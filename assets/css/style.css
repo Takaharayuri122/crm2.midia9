@@ -1,0 +1,64 @@
+.statistic-box.blue {
+  background-color: #008FFB;
+}
+
+.statistic-box.gray {
+  background-color: #304B58;
+}
+
+.card-danger-fill .card-header {
+    border-bottom-color: #fa0a27;
+    background-color: #fa0a27;
+    color: #fff;
+}
+
+.card-warning-fill .card-header {
+    border-bottom-color: #F29824;
+    background-color: #F29824;
+    color: #fff;
+}
+
+.card-success-fill .card-header {
+    border-bottom-color: #46C35F;
+    background-color: #46C35F;
+    color: #fff;
+}
+
+
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+  -webkit-animation: ngdialog-flyin .5s;
+  animation: ngdialog-flyin .5s;
+  background: transparent;
+  color: #444;
+  font-family: 'Helvetica',sans-serif;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 1em;
+  position: relative;
+  margin-top: 5%;
+}
+
+.ngdialog-content{
+  margin-top: 5%;
+}
+
+.alert.alert-black{
+  border-color: #252229;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.alert.alert-purple{
+  border-color: #ac6bec;
+  background-color: rgba(172, 107, 236, 0.19);
+}
+
+.label-black {
+  background-color: #080808;
+}
+
+.card-footer, .card-header {
+  background: 0 0;
+  background-color: rgba(154, 154, 154, 0.16);
+}
