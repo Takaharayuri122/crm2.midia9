@@ -2,7 +2,6 @@ angular.module('app.marketing', [])
 
 .controller('Lead', function($scope, $http,$log,base_url, $log, $location, ngDialog, $httpParamSerializerJQLike, $filter){
 	$scope.filtro = {};
-  $scope.load = true;
   
 
   $scope.$watch('load', function() {
@@ -30,10 +29,12 @@ angular.module('app.marketing', [])
     $log.warn($scope.filtro);
   });
 
-  var request = function() {
+  var request = function(limit = null, load = null) {
+    if(load)$scope.load = true;
+    if(!load)$scope.load = false;
     $http({
       method: 'POST',
-      url: base_url.get + '/marketing/Lead/getLeads/99',
+      url: base_url.get + '/marketing/Lead/getLeads/' + limit,
     })
     .success(function(dados){
       $log.info(dados);
@@ -73,6 +74,7 @@ angular.module('app.marketing', [])
       scope: $scope,
       width: '65%',
     });
+    $log.info($scope.inte);
     $scope.load = false;
   }
 
@@ -83,7 +85,7 @@ angular.module('app.marketing', [])
     })
     .success(function(dados){
       $log.info(dados);
-      request();
+      request(20, false);
     })
     .error(function(dados){
       $log.error(dados);
@@ -91,12 +93,13 @@ angular.module('app.marketing', [])
     });
   }
 
-  $scope.setLeadStatus = function(id, status, statusNome) {
+  $scope.setLeadStatus = function(id, status, statusNome, template = null) {
+    if(!template) template = 'v_infoAlert';
     $scope.load = true;
     $scope.leadStatus = statusNome;
     $scope.class = 'warning';
     ngDialog.openConfirm({ 
-      template: 'v_infoAlert' ,
+      template: template ,
       scope: $scope,
       width: '25%'
     }).then(function(result){
@@ -106,7 +109,7 @@ angular.module('app.marketing', [])
       })
       .success(function(dados){
         $log.info(dados);
-        request();
+        request(20, true);
       })
       .error(function(dados){
         $log.error(dados);
@@ -153,6 +156,23 @@ angular.module('app.marketing', [])
     $scope.load = false;
   }
 
+  $scope.requestAll = function() {
+    $scope.class = 'danger';
+    ngDialog.openConfirm({
+      template: 'v_infoAlertRequestAll' ,
+      scope: $scope,
+      width: '25%'
+    })
+    .then(function(result){
+      if (result == 1) {
+        request();
+      }
+      else {
+        ngDialog.close();
+      }
+    });
+  }
+
   $scope.$on('ngDialog.opened', function (e, $dialog) {
     $('#select2').each(function(){
       $('#select2').selectpicker({
@@ -169,5 +189,5 @@ angular.module('app.marketing', [])
       });
   });
 
-  request();
+  request(20, true);
 });

@@ -42,7 +42,7 @@ class Login extends Evo_Utilities {
           $this->session->usuario->empresa_padrao = $empresa;
           $this->session->usuario->empresa = $empresas;
 
-          $retorno['success'] = 'Autenticado com Sucesso'; 
+          $retorno = $this->session->usuario;
 
         }
         else {

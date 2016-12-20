@@ -1,10 +1,9 @@
 angular.module('app.dashboard', [])
 
-.controller('Dashboard', function($scope, $http,$log,base_url, $log, $location, ngDialog){
+.controller('Dashboard', function($scope, $http,$log,base_url, $log, $location, ngDialog, StorageService){
 	$log.info('Load Ctrl: Dashboard');
 
 	var request = function() {
-		$scope.load = true;
 		$http({
 			method: 'POST',
 			url: base_url.get + '/dashboard/getDashboardInfos',
