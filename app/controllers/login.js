@@ -1,8 +1,9 @@
-angular.module('app.login', ['app.factories', 'ngDialog'])
+angular.module('app.login', ['app.factories', 'ngDialog', 'ngStorage'])
 
-.controller('Login', function($scope, $http,$log, $httpParamSerializerJQLike, base_url, $log, $location) {
+.controller('Login', function($scope, $http,$log, $httpParamSerializerJQLike, base_url, $log, $location, StorageService) {
 	$log.info('Ctrl: Login');
-
+	StorageService.set();
+	StorageService.remove();
 	$scope.Login = function(dados) {
 		$log.info('Fct: Login');
 		$http({
@@ -15,10 +16,12 @@ angular.module('app.login', ['app.factories', 'ngDialog'])
 		})
 		.success(function(dados){
 			if (dados.error) {
-				$scope.retorno = dados.error;	
+				$scope.retorno = dados.error;
+				
 			}
 			else {
 				$log.info(dados);
+				StorageService.add(dados);
 				location.reload();
 			}
 		})

@@ -2,10 +2,12 @@ angular.module('app',
 				['ngRoute', 
 				 'ngMask',
 				 'angular-bootstrap-select',
-				 'ngDialog', 
+				 'ngDialog',
+				 'ngStorage',
 				 'app.factories',
 				 'app.dashboard',
 				 'app.empresa',
 				 'app.usuario',
-				 'app.marketing'
+				 'app.marketing',
+				 'app.header'
 				]);

@@ -28,6 +28,38 @@ angular.module('app.empresa', [])
     $("option:selected").prop("selected", false)
   }
 
+  $scope.adicionar = function() {
+    ngDialog.openConfirm({
+      template: 'v_AdicionarEmpresa',
+      width: '45%',
+      scope: $scope
+    })
+    .then(function(result){
+      $log.info(result);
+      if (result) {
+        $http({
+          method: 'POST',
+          url: base_url.get + '/gerencial/empresa/addEmpresa',
+          data:  $httpParamSerializerJQLike(result),
+          headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        })
+        .success(function(dados){
+          $log.info(dados);
+          request(20, true);
+        })
+        .error(function(dados){
+          $log.error(dados);
+          $scope.load = false;
+        });
+      }
+      else {
+        ngDialog.close();
+      }
+    });
+  }
+
   $scope.salvar = function(data) {
   	$http({
       method: 'POST',
@@ -65,28 +97,12 @@ angular.module('app.empresa', [])
     $scope.editable = false;
   }
 
-  /*var checarCampos = function(campo) {
-  	$http({
-			method: 'GET',
-			url: base_url.get + '/gerencial/empresa/checarCampos',
-		})
-		.success(function(dados){
-			$scope.load = false;
-			$log.info(dados);
-			$scope.dados = dados;
-		})
-		.error(function(dados){
-			$log.error(dados);
-			$scope.load = false;
-		});
-  }*/
-
-	var request = function() {
-		$scope.load = true;
+	var request = function(limit = null, load = null) {
+		$scope.load = load;
 		$scope.filtro = {};
 		$http({
 			method: 'POST',
-			url: base_url.get + '/gerencial/empresa/getEmpresas',
+			url: base_url.get + '/gerencial/empresa/getEmpresas/'+limit,
 		})
 		.success(function(dados){
 			$scope.load = false;
@@ -119,6 +135,23 @@ angular.module('app.empresa', [])
       }
   });
 
-	request();
+  $scope.$on('ngDialog.opened', function (e, $dialog) {
+    $('.select2').each(function(){
+      $('.select2').selectpicker({
+        width: '100%'
+      });
+    });
+    $('#tags-editor-textarea').tagEditor();
+    $('.datetimepicker-1').datetimepicker({
+        widgetPositioning: {
+          horizontal: 'right'
+        },
+        debug: false,
+        format: 'YYYY-DD-MM',
+        locale: 'pt-br'
+      });
+  });
+
+	request(99, false);
 	jquery();
 })

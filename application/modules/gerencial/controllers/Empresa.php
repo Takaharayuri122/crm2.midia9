@@ -6,7 +6,7 @@ class Empresa extends Evo_Utilities {
 
 	public function index() {
 		if ($this->logged()) {
-			$this->template('gerencial/v_consulta_empresa', null);
+			$this->template('gerencial/v_empresa', null);
 		}
 	}
 
@@ -50,14 +50,19 @@ class Empresa extends Evo_Utilities {
 
 	public function addEmpresa() {
 		if ($this->logged()) {
-			$dados = $this->input->post();
+			if ($_POST) {
+				$dados = $this->input->post();
+				/*if (!@$dados['EMP_CodigoPai']) $dados['EMP_CodigoPai'] = 0;*/
+				var_dump($dados);
+			}
+			/*$dados = $this->input->post();
 			$query = $this->db->insert('empresa', $dados);
 			if ($query) {
 				$this->getEmpresas();
 			}
 			else {
 				$retorno['error'] = true;
-			}
+			}*/
 		}
 	}
 }

@@ -90,6 +90,7 @@
 	<script type="text/javascript" src="<?=base_url()?>/app/controllers/usuario.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>/app/controllers/produto.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>/app/controllers/marketing.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>/app/controllers/header.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>/app/app.js"></script>
 
 	<script>
