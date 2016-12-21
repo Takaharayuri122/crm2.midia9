@@ -98,6 +98,7 @@ angular.module('app.empresa', [])
   }
 
 	var request = function(limit = null, load = null) {
+    /*ESSA PARTE AQUI É ONDE VOCê MANDA AO VIVO lul */
 		$scope.load = load;
 		$scope.filtro = {};
 		$http({
